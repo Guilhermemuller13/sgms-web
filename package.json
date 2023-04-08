@@ -1,0 +1,71 @@
+{
+  "name": "client-tcc",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:dev": "next dev",
+    "build": "next build",
+    "start:build": "yarn build && next start",
+    "lint": "eslint src --max-warnings=0",
+    "generate": "yarn plop --plopfile generators/plopfile.js",
+    "storybook": "start-storybook -s ./public -p 6006",
+    "build-storybook": "build-storybook -s ./public"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "yarn lint --fix",
+      "yarn test --findRelatedTests --bail"
+    ]
+  },
+  "dependencies": {
+    "@react-theming/storybook-addon": "^1.1.7",
+    "@styled-icons/fa-brands": "^10.46.0",
+    "axios": "^0.27.2",
+    "caniuse-lite": "^1.0.30001414",
+    "cookies-next": "^2.1.1",
+    "formik": "^2.2.9",
+    "next": "12.3.1",
+    "next-pwa": "^5.6.0",
+    "nextjs-progressbar": "^0.0.14",
+    "polished": "^4.2.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-slick": "^0.29.0",
+    "styled-components": "5.3.6",
+    "styled-icons": "^10.46.0",
+    "styled-media-query": "^2.1.2",
+    "sweetalert2": "^11.6.9",
+    "sweetalert2-react-content": "^5.0.7",
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-typescript": "^7.18.6",
+    "@storybook/addon-essentials": "6.5.12",
+    "@storybook/react": "6.5.12",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/node": "^18.8.0",
+    "@types/react": "^18.0.21",
+    "@types/react-slick": "^0.23.10",
+    "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "5.38.1",
+    "@typescript-eslint/parser": "5.38.1",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-styled-components": "^2.0.7",
+    "eslint": "^8.24.0",
+    "eslint-config-next": "^12.3.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "lint-staged": "^13.0.3",
+    "plop": "^3.1.1",
+    "prettier": "^2.7.1",
+    "storybook-addon-next-router": "^4.0.0",
+    "typescript": "^4.8.4"
+  }
+}
