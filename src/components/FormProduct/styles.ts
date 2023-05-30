@@ -1,11 +1,22 @@
-import styled, { css } from 'styled-components';
-import media from 'styled-media-query';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
 export const WrapperTextFileds = styled.div`
   ${({ theme }) => css`
     display: flex;
 
-    ${media.lessThan('medium')`
+    ${media.lessThan("medium")`
+      flex-direction: column;
+    `}
+  `}
+`;
+
+export const WrapperTextFiledFile = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    padding: ${theme.spacings.xxsmall} ${theme.spacings.xxsmall};
+
+    ${media.lessThan("medium")`
       flex-direction: column;
     `}
   `}

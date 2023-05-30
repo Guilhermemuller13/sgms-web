@@ -1,11 +1,13 @@
-import { FC, PropsWithChildren } from 'react';
-import { ArrowBack, Edit } from '@styled-icons/material-outlined';
-import { useRouter } from 'next/router';
+import { FC, PropsWithChildren } from "react";
+import { ArrowBack, Edit } from "@styled-icons/material-outlined";
+import { useRouter } from "next/router";
 
-import Button from '../Button';
-import ListImagesPreview from '../ListImagesPreview';
+import Button from "../Button";
+import ListImagesPreview from "../ListImagesPreview";
 
-import * as S from './styles';
+import { getImageUrl } from "../../utils/getImageUrl";
+
+import * as S from "./styles";
 
 export type ProductViewProps = {
   product: any;
@@ -15,7 +17,7 @@ const ProductView: FC<PropsWithChildren<ProductViewProps>> = ({ product }) => {
   const routes = useRouter();
   const files = JSON.parse(product.photos);
 
-  console.log({ product });
+  console.log({ files });
 
   return (
     <S.Wrapper>
@@ -23,7 +25,7 @@ const ProductView: FC<PropsWithChildren<ProductViewProps>> = ({ product }) => {
         <Button
           icon={<ArrowBack />}
           size="medium"
-          onClick={() => routes.push('/products')}
+          onClick={() => routes.push("/products")}
           type="button"
         >
           Voltar
@@ -43,7 +45,7 @@ const ProductView: FC<PropsWithChildren<ProductViewProps>> = ({ product }) => {
         <ListImagesPreview
           files={files.map((file) => ({
             id: file.id,
-            src: `${file.base_url}/${file.src}`
+            src: getImageUrl(file.src),
           }))}
         />
       </S.WrapperContent>

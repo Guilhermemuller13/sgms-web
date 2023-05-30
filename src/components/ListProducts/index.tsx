@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-import { getImageUrl } from '../../utils/getImageUrl';
-import Card from '../Card';
+import { getImageUrl } from "../../utils/getImageUrl";
+import Card from "../Card";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 type Product = {
   dataValues: {
@@ -29,7 +29,7 @@ const ListProducts = ({ products }: ListProductsProps) => {
     return (products || []).map((product) => (
       <Card
         onClick={() => handleClickProduct(product.dataValues.id)}
-        imageSrc={getImageUrl(product.dataValues.photos?.split(';')[0])}
+        imageSrc={getImageUrl(product.dataValues.photos?.split(";")[0])}
         title={product.dataValues.name}
         description={product.dataValues.description}
         price={product.dataValues.price}
@@ -37,6 +37,7 @@ const ListProducts = ({ products }: ListProductsProps) => {
       />
     ));
   };
+
   return <S.Wrapper>{renderProducts()}</S.Wrapper>;
 };
 

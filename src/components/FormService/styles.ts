@@ -1,16 +1,20 @@
-import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
-export const ForgotPassword = styled.a`
+export const WrapperTextFileds = styled.div`
   ${({ theme }) => css`
-    display: block;
-    font-size: ${theme.font.sizes.small};
-    color: ${theme.colors.black};
-    text-decoration: none;
-    text-align: right;
+    display: flex;
 
-    &:hover {
-      color: ${lighten(0.2, theme.colors.black)};
-    }
+    ${media.lessThan("medium")`
+      flex-direction: column;
+    `}
+  `}
+`;
+
+export const WrapperActionsForm = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
   `}
 `;

@@ -1,24 +1,27 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+import { Formik, Form } from "formik";
 import {
   Email,
   ArrowBack,
   ErrorOutline,
   Save,
-  FileUpload
-} from '@styled-icons/material-outlined';
-import { v4 as uuidv4 } from 'uuid';
+  FileUpload,
+} from "@styled-icons/material-outlined";
+import { v4 as uuidv4 } from "uuid";
 
-import Button from 'components/Button';
-import TextField from 'components/TextField';
-import { FormError, FormWrapper } from 'components/Form';
-import FileField from '../FileField';
+import Button from "components/Button";
+import TextField from "components/TextField";
+import { FormError, FormWrapper } from "components/Form";
+import FileField from "../FileField";
 
-import * as S from './styles';
-import ListImagesPreview, { ListFilesBlob } from '../ListImagesPreview';
-import { fileToBlob } from '../../services/files';
+import * as S from "./styles";
+import ListImagesPreview, { ListFilesBlob } from "../ListImagesPreview";
+import { fileToBlob } from "../../services/files";
+import TextAreaField from "../TextAreaField";
+import { C } from "styled-icons/fa-solid";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 export type FormProductSchema = {
   name: string;
@@ -34,16 +37,16 @@ export type FormProductSchema = {
 };
 
 const initialValues: FormProductSchema = {
-  name: '',
-  code: '',
-  description: '',
-  brand: '',
-  price: '',
+  name: "",
+  code: "",
+  description: "",
+  brand: "",
+  price: "",
   quantity: 0,
   quantity_minimum: 0,
   available: false,
   photos: [],
-  updatedFiles: []
+  updatedFiles: [],
 };
 
 const formSchemaValues = Yup.object({});
@@ -58,11 +61,11 @@ export type FormProductProps = {
 const FormProduct = ({
   handleSubmitForm,
   loading = false,
-  errorForm = '',
-  productForEdit
+  errorForm = "",
+  productForEdit,
 }: FormProductProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [formError, setFormError] = useState('');
+  const [formError, setFormError] = useState("");
   const [blobImages, setBlobImages] = useState<ListFilesBlob[]>([]);
   const routes = useRouter();
 
@@ -79,7 +82,7 @@ const FormProduct = ({
   const converFileToBlob = (file: File, id: string) => {
     setBlobImages((prevState) => [
       ...prevState,
-      { src: fileToBlob(file), id: id, file: file }
+      { src: fileToBlob(file), id: id, file: file },
     ]);
   };
 
@@ -98,7 +101,7 @@ const FormProduct = ({
     if (productForEdit?.photos) {
       const files = productForEdit.photos.map((file) => ({
         id: file.id,
-        src: `${file.base_url}/${file.src}`
+        src: getImageUrl(file.src),
       }));
 
       setBlobImages(files);
@@ -123,7 +126,7 @@ const FormProduct = ({
               <Button
                 icon={<ArrowBack />}
                 size="medium"
-                onClick={() => routes.push('/products')}
+                onClick={() => routes.push("/products")}
                 type="button"
               >
                 Voltar
@@ -140,7 +143,7 @@ const FormProduct = ({
                 type="text"
                 error={errors.name}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('name', value)}
+                onInput={(value) => setFieldValue("name", value)}
                 value={values.name}
               />
             </S.WrapperTextFileds>
@@ -152,7 +155,7 @@ const FormProduct = ({
                 type="text"
                 error={errors.price}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('price', value)}
+                onInput={(value) => setFieldValue("price", value)}
                 value={values.price}
               />
               <TextField
@@ -162,7 +165,7 @@ const FormProduct = ({
                 type="text"
                 error={errors.code}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('code', value)}
+                onInput={(value) => setFieldValue("code", value)}
                 value={values.code}
               />
             </S.WrapperTextFileds>
@@ -174,7 +177,7 @@ const FormProduct = ({
                 type="text"
                 error={errors.brand}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('brand', value)}
+                onInput={(value) => setFieldValue("brand", value)}
                 value={values.brand}
               />
               <TextField
@@ -183,7 +186,7 @@ const FormProduct = ({
                 type="number"
                 error={errors.quantity}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('quantity', value)}
+                onInput={(value) => setFieldValue("quantity", value)}
                 value={values.quantity}
               />
               <TextField
@@ -192,11 +195,19 @@ const FormProduct = ({
                 type="number"
                 error={errors.quantity_minimum}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('quantity_minimum', value)}
+                onInput={(value) => setFieldValue("quantity_minimum", value)}
                 value={values.quantity_minimum}
               />
             </S.WrapperTextFileds>
             <S.WrapperTextFileds>
+              <TextAreaField
+                label="Descrição do produto"
+                error={errors.description}
+                value={values.description}
+                onInput={(value) => setFieldValue("description", value)}
+              />
+            </S.WrapperTextFileds>
+            <S.WrapperTextFiledFile>
               <FileField
                 accept="image/png, image/jpeg"
                 ref={fileInputRef}
@@ -208,13 +219,13 @@ const FormProduct = ({
 
                     converFileToBlob(file, id);
 
-                    setFieldValue('photos', [
+                    setFieldValue("photos", [
                       ...values.photos,
-                      { file, id: id }
+                      { file, id: id },
                     ]);
                   }
 
-                  event.target.value = '';
+                  event.target.value = "";
                 }}
               />
               <Button
@@ -235,13 +246,13 @@ const FormProduct = ({
                 labelFor="available"
                 labelColor="black"
               /> */}
-            </S.WrapperTextFileds>
-            <S.WrapperTextFileds>
+            </S.WrapperTextFiledFile>
+            <S.WrapperTextFiledFile>
               <ListImagesPreview
                 files={blobImages}
                 onRemoveFile={handleDeleteFile}
               />
-            </S.WrapperTextFileds>
+            </S.WrapperTextFiledFile>
           </Form>
         )}
       </Formik>

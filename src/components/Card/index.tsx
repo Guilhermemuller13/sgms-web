@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export type CardProps = {
+  onClick: () => any;
   imageSrc?: string;
   title: string;
   description?: string;
@@ -10,17 +11,16 @@ export type CardProps = {
 };
 
 const Card = ({
-  imageSrc = '',
-  title = '',
-  description = '',
-  price = '',
+  imageSrc = "",
+  title = "",
+  description = "",
+  price = "",
   ...props
 }: CardProps) => {
   const [imageUrl, setImageUrl] = useState<string>(imageSrc);
 
   const onErrorImage = () => {
-    console.error('erro');
-    setImageUrl('/img/no-image.jpg');
+    setImageUrl("/img/no-image.jpg");
   };
 
   return (

@@ -1,14 +1,20 @@
-import styled, { css } from 'styled-components';
-import { darken } from 'polished';
+import styled, { css } from "styled-components";
+import { darken } from "polished";
 
-import * as TextFieldStyles from 'components/TextField/styles';
-import * as ButtonStyles from 'components/Button/styles';
+import * as TextFieldStyles from "components/TextField/styles";
+import * as TextAreaFieldStyles from "components/TextAreaField/styles";
+import * as FileFieldStyles from "components/FileField/styles";
+import * as ButtonStyles from "components/Button/styles";
 
 export const FormWrapper = styled.div`
   ${({ theme }) => css`
     width: 100%;
     /* padding: ${theme.spacings.xxsmall}; */
     ${TextFieldStyles.Wrapper} {
+      padding: ${theme.spacings.xxsmall} ${theme.spacings.xxsmall};
+    }
+
+    ${TextAreaFieldStyles.Wrapper} {
       padding: ${theme.spacings.xxsmall} ${theme.spacings.xxsmall};
     }
 

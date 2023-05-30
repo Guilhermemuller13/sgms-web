@@ -1,15 +1,16 @@
-import { useRouter } from 'next/router';
-import { GetServerSidePropsContext } from 'next';
+import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next";
 
-import Container from '../../components/Container';
-import FormProduct, { FormProductSchema } from '../../components/FormProduct';
-import Base from '../../templates/Base';
+import Container from "../../components/Container";
+import FormProduct, { FormProductSchema } from "../../components/FormProduct";
+import Base from "../../templates/Base";
 
-import api from '../../services/api';
-import { withSession } from '../../services/auth/session';
-import { UserSession } from '../../types/models';
+import api from "../../services/api";
+import { tokenService } from "../../services/auth/tokenService";
+import { withSession } from "../../services/auth/session";
+import { UserSession } from "../../types/models";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 type ProductNewProps = { session: UserSession };
 
@@ -17,7 +18,8 @@ const ProductNew = ({ session }: ProductNewProps) => {
   const routes = useRouter();
 
   const handleSubmitForm = async (values: FormProductSchema) => {
-    const product: Omit<FormProductSchema, 'photos'> = {
+    const token = tokenService.get({ context: null });
+    const product: Omit<FormProductSchema, "photos"> = {
       name: values.name,
       quantity_minimum: +values.quantity_minimum,
       available: values.available,
@@ -25,21 +27,24 @@ const ProductNew = ({ session }: ProductNewProps) => {
       code: values.code,
       description: values.description,
       price: values.price,
-      quantity: +values.quantity
+      quantity: +values.quantity,
     };
 
     try {
-      const { data } = await api.post('/products', product);
+      const { data } = await api.post("/products", product, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (Array.from(values.photos).length > 0) {
         const formData = new FormData();
         Array.from(values.photos).forEach((photo) =>
-          formData.append('photos', photo.file)
+          formData.append("photos", photo.file)
         );
+        console.log({ formData });
         const productId = data.dataValues.id;
         await api.post(`/products/files/${productId}`, formData);
       }
-      return routes.push('/products');
+      return routes.push("/products");
     } catch (error) {
       console.log({ error });
     }
@@ -62,11 +67,11 @@ export const getServerSideProps = withSession(
 
     return {
       props: {
-        session: session
-      }
+        session: session,
+      },
     };
   },
-  'manage:products'
+  "manage:products"
 );
 
 export default ProductNew;
