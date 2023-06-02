@@ -20,6 +20,7 @@
   "dependencies": {
     "@react-theming/storybook-addon": "^1.1.7",
     "@styled-icons/fa-brands": "^10.46.0",
+    "@tanstack/react-table": "^8.9.1",
     "axios": "^0.27.2",
     "caniuse-lite": "^1.0.30001414",
     "cookies-next": "^2.1.1",

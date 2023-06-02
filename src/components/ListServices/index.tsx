@@ -1,16 +1,13 @@
 import { useRouter } from "next/router";
 
-import { getImageUrl } from "../../utils/getImageUrl";
-import Card from "../Card";
+import TableServices from "../TableServices";
 
 import * as S from "./styles";
 
-type Service = {
+export type Service = {
   dataValues: {
-    photos: string;
     description: string;
     name: string;
-    price: string;
     id: string;
   };
 };
@@ -19,23 +16,17 @@ export type ListServicesProps = { services: Service[] };
 
 const ListServices = ({ services }: ListServicesProps) => {
   const routes = useRouter();
+
   const handleClickService = (id: string) => {
-    if (id) {
+    if (!!id) {
       return routes.push(`/services/view/${id}`);
     }
   };
 
   const renderProducts = () => {
-    return (services || []).map((service) => (
-      <Card
-        onClick={() => handleClickService(service.dataValues.id)}
-        imageSrc={getImageUrl(service.dataValues.photos?.split(";")[0])}
-        title={service.dataValues.name}
-        description={service.dataValues.description}
-        price={service.dataValues.price}
-        key={service.dataValues.id}
-      />
-    ));
+    return (
+      <TableServices data={services} handleClickService={handleClickService} />
+    );
   };
 
   return <S.Wrapper>{renderProducts()}</S.Wrapper>;
