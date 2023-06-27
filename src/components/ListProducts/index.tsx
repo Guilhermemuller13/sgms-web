@@ -5,7 +5,7 @@ import Card from "../Card";
 
 import * as S from "./styles";
 
-type Product = {
+export type Product = {
   dataValues: {
     photos: string;
     description: string;

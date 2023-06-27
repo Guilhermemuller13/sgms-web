@@ -1,14 +1,14 @@
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { css, DefaultTheme } from "styled-components";
 
-import { SelectProps } from '.';
+import { SelectProps } from ".";
 
-type WrapperProps = Pick<SelectProps, 'disabled'> & { error?: boolean };
+type WrapperProps = Pick<SelectProps, "disabled"> & { error?: boolean };
 
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     height: 4.2rem;
-    padding: 0 ${theme.spacings.xxsmall};
+    /* padding: 0 ${theme.spacings.xxsmall}; */
   `}
 `;
 
@@ -37,7 +37,7 @@ export const Select = styled.select`
 export const Label = styled.label`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};
-    padding: 0 ${theme.spacings.xxsmall};
+    /* padding: 0 ${theme.spacings.xxsmall}; */
     color: ${theme.colors.black};
     cursor: pointer;
   `}
@@ -70,7 +70,7 @@ const wrapperModifiers = {
         color: currentColor;
       }
     }
-  `
+  `,
 };
 
 export const Wrapper = styled.div<WrapperProps>`

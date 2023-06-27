@@ -19,7 +19,7 @@ const ListServices = ({ services }: ListServicesProps) => {
 
   const handleClickService = (id: string) => {
     if (!!id) {
-      return routes.push(`/services/view/${id}`);
+      return routes.push(`/services/${id}`);
     }
   };
 
