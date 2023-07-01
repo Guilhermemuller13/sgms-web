@@ -20,7 +20,7 @@ import * as S from "./styles";
 import ListImagesPreview, { ListFilesBlob } from "../ListImagesPreview";
 import { fileToBlob } from "../../services/files";
 import TextAreaField from "../TextAreaField";
-import { C } from "styled-icons/fa-solid";
+
 import { getImageUrl } from "../../utils/getImageUrl";
 
 export type FormProductSchema = {
@@ -49,7 +49,15 @@ const initialValues: FormProductSchema = {
   updatedFiles: [],
 };
 
-const formSchemaValues = Yup.object({});
+const formSchemaValues = Yup.object({
+  name: Yup.string().required("Insira um nome"),
+  code: Yup.string().required("Insira um código"),
+  price: Yup.string().required("Insira um preço"),
+  brand: Yup.string().required("Insira uma marca"),
+  description: Yup.string().required("Insira uma descrição"),
+  quantity: Yup.number().required("Insira uma quantidade"),
+  quantity_minimum: Yup.number().required("Insira uma quantidade mínima"),
+});
 
 export type FormProductProps = {
   handleSubmitForm: (values: FormProductSchema) => void;

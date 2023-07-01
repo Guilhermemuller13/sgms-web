@@ -24,8 +24,6 @@ const ListImagesPreview: FC<PropsWithChildren<ListImagesPreviewProps>> = ({
   const handleDeleteFile = (fileId: string) =>
     onRemoveFile && onRemoveFile(fileId);
 
-  console.log({ filesview: files });
-
   const renderImages = () => {
     return files.map((file) => {
       return (

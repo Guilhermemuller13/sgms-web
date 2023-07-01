@@ -33,6 +33,7 @@ export const TextArea = styled.textarea<IconPositionProps>`
     border: 0;
     outline: none;
     width: 100%;
+    resize: none;
   `}
 `;
 
@@ -77,7 +78,7 @@ const wrapperModifiers = {
   `,
   disabled: (theme: DefaultTheme) => css`
     ${Label},
-    ${Input},
+    ${TextArea},
     ${Icon} {
       cursor: not-allowed;
       color: ${theme.colors.gray};

@@ -40,7 +40,12 @@ const initialValues: FormServiceSchema = {
   products: [],
 };
 
-const formSchemaValues = Yup.object({});
+const formSchemaValues = Yup.object({
+  name: Yup.string().required("Insira um nome"),
+  description: Yup.string().required("Insira uma descrição"),
+  motorcycleId: Yup.number().required("Selecione uma moto").min(0),
+  userId: Yup.number().required("Selecione um funcionário").min(0),
+});
 
 export type FormServiceProps = {
   handleSubmitForm: (values: FormServiceSchema) => void;
@@ -60,7 +65,6 @@ const FormService: FC<FormServiceProps> = ({
   listProducts,
   handleSubmitForm,
 }) => {
-  console.log({ serviceForEdit });
   const [formError, setFormError] = useState("");
   const [productList, setProductList] = useState<ProductList[]>(
     listProducts || [

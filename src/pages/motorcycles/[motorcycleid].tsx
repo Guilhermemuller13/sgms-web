@@ -1,16 +1,17 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 
-import Container from '../../components/Container';
-import Base from '../../templates/Base';
-import FormMotorcycle from '../../components/FormMotorcycle';
+import Container from "../../components/Container";
+import Base from "../../templates/Base";
+import FormMotorcycle from "../../components/FormMotorcycle";
 
-import api from '../../services/api';
-import { tokenService } from '../../services/auth/tokenService';
-import { withSession } from '../../services/auth/session';
+import api from "../../services/api";
+import { tokenService } from "../../services/auth/tokenService";
+import { withSession } from "../../services/auth/session";
 
-import { UserSession } from '../../types/models';
+import { UserSession } from "../../types/models";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 type MotorcycleEditProps = {
   motorcycle: any;
@@ -21,22 +22,24 @@ type MotorcycleEditProps = {
 const MotorcycleEdit = ({
   motorcycle,
   motorcycleId,
-  session
+  session,
 }: MotorcycleEditProps) => {
   const handleSubmitForm = async (values: any) => {
+    const routes = useRouter();
+
     const token = tokenService.get({ context: null });
+
+    const motorcycle = { ...values };
     try {
-      const { data } = await api.post(
-        `/users/${motorcycleId}`,
+      const { data } = await api.put(
+        `/motorcycles/${motorcycleId}`,
+        motorcycle,
         {
-          username: values.username,
-          email: values.email,
-          role_id: values.role_id
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
+
+      return routes.push("/motorcycles");
     } catch (error) {
       console.log({ error });
     }
@@ -51,10 +54,10 @@ const MotorcycleEdit = ({
             motorcycleForEdit={{
               license_plate: motorcycle.license_plate,
               year: motorcycle.year,
-              engine_capacity: motorcycle.engine_capacity,
+              engine_capacity: +motorcycle.engine_capacity,
               color: motorcycle.color,
               brand: motorcycle.brand,
-              name: motorcycle.name
+              name: motorcycle.name,
             }}
           />
         </S.Wrapper>
@@ -73,7 +76,7 @@ export const getServerSideProps = withSession(
       const { data } = await api.get(
         `/motorcycles/${context.params.motorcycleid}`,
         {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
@@ -81,19 +84,19 @@ export const getServerSideProps = withSession(
         props: {
           motorcycle: data.dataValues,
           motorcycleId: +context.params.motorcycleid,
-          session: session
-        }
+          session: session,
+        },
       };
     } catch (error) {
       return {
         props: {
           motorcycle: undefined,
-          session: session
-        }
+          session: session,
+        },
       };
     }
   },
-  'manage:motorcycles'
+  "manage:motorcycles"
 );
 
 export default MotorcycleEdit;

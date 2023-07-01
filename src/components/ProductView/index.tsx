@@ -17,8 +17,6 @@ const ProductView: FC<PropsWithChildren<ProductViewProps>> = ({ product }) => {
   const routes = useRouter();
   const files = JSON.parse(product.photos);
 
-  console.log({ files });
-
   return (
     <S.Wrapper>
       <S.WrapperActionsForm>

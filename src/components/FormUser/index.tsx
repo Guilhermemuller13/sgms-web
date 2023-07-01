@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+import { Formik, Form } from "formik";
 import {
   Email,
   ArrowBack,
   ErrorOutline,
-  Save
-} from '@styled-icons/material-outlined';
+  Save,
+} from "@styled-icons/material-outlined";
 
-import Button from 'components/Button';
-import TextField from 'components/TextField';
-import { FormError, FormWrapper } from 'components/Form';
+import Button from "components/Button";
+import TextField from "components/TextField";
+import { FormError, FormWrapper } from "components/Form";
 
-import * as S from './styles';
-import Select from '../Select';
+import * as S from "./styles";
+import Select from "../Select";
 
 export type FormUserSchema = {
   username: string;
@@ -23,17 +23,17 @@ export type FormUserSchema = {
 };
 
 const initialValues: FormUserSchema = {
-  username: '',
-  email: '',
-  role_id: 1
+  username: "",
+  email: "",
+  role_id: 1,
 };
 
 const formSchemaValues = Yup.object({
   email: Yup.string()
-    .email('Insira um email válido')
-    .required('Insira seu email'),
-  username: Yup.string().required('Insira o nome do usuário'),
-  role_id: Yup.number().required('Selecione o papel do usuário')
+    .email("Insira um email válido")
+    .required("Insira seu email"),
+  username: Yup.string().required("Insira o nome do usuário"),
+  role_id: Yup.number().required("Selecione o papel do usuário"),
 });
 
 export type FormUserProps = {
@@ -46,8 +46,8 @@ export type FormUserProps = {
 const FormUser = ({
   handleSubmitForm,
   loading = false,
-  errorForm = '',
-  userForEdit
+  errorForm = "",
+  userForEdit,
 }: FormUserProps) => {
   const [formError, setFormError] = useState(errorForm);
   const routes = useRouter();
@@ -76,7 +76,7 @@ const FormUser = ({
               <Button
                 icon={<ArrowBack />}
                 size="medium"
-                onClick={() => routes.push('/users')}
+                onClick={() => routes.push("/users")}
                 type="button"
               >
                 Voltar
@@ -85,7 +85,7 @@ const FormUser = ({
                 Salvar
               </Button>
             </S.WrapperActionsForm>
-            <S.WrapperTextFileds>
+            <S.WrapperTextFields>
               <TextField
                 name="username"
                 label="Nome"
@@ -93,7 +93,7 @@ const FormUser = ({
                 type="text"
                 error={errors.username}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('username', value)}
+                onInput={(value) => setFieldValue("username", value)}
                 value={values.username}
               />
               <TextField
@@ -103,20 +103,20 @@ const FormUser = ({
                 type="text"
                 error={errors.email}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('email', value)}
+                onInput={(value) => setFieldValue("email", value)}
                 value={values.email}
               />
               <Select
                 label="Selecione o tipo de usuário"
-                onSelect={(value) => setFieldValue('role_id', value)}
+                onSelect={(value) => setFieldValue("role_id", value)}
                 value={values.role_id}
                 error={errors.role_id}
               >
                 <option value={1}>Administrador</option>
                 <option value={2}>Usuário</option>
               </Select>
-            </S.WrapperTextFileds>
-            <S.WrapperTextFileds></S.WrapperTextFileds>
+            </S.WrapperTextFields>
+            <S.WrapperTextFields></S.WrapperTextFields>
           </Form>
         )}
       </Formik>

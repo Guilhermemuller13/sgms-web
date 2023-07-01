@@ -1,23 +1,23 @@
-import { useState, ReactNode, ChangeEvent, InputHTMLAttributes } from 'react';
+import { useState, ReactNode, ChangeEvent, InputHTMLAttributes } from "react";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export type TextFieldProps = {
   onInput?: (value: string) => void;
   label?: string;
   initialValue?: string;
   icon?: ReactNode;
-  iconPosition?: 'left' | 'right';
+  iconPosition?: "left" | "right";
   disabled?: boolean;
   error?: string;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "onInput">;
 
 const TextField = ({
   icon,
-  iconPosition = 'left',
+  iconPosition = "left",
   label,
   name,
-  initialValue = '',
+  initialValue = "",
   error,
   disabled = false,
   onInput,

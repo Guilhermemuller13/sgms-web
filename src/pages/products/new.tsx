@@ -40,7 +40,7 @@ const ProductNew = ({ session }: ProductNewProps) => {
         Array.from(values.photos).forEach((photo) =>
           formData.append("photos", photo.file)
         );
-        console.log({ formData });
+
         const productId = data.dataValues.id;
         await api.post(`/products/files/${productId}`, formData);
       }
