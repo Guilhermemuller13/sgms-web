@@ -63,7 +63,7 @@ const ListUsers = ({ users, currentUser }: ListUsersProps) => {
             size="small"
             onClick={() => handleEditUser(user.dataValues.id)}
           />
-          {currentUser.user.email !== user.dataValues.email && (
+          {currentUser?.user.email !== user.dataValues.email && (
             <Button
               icon={<Trash />}
               size="small"

@@ -1,13 +1,19 @@
-import Head from 'next/head';
-import { AppProps } from 'next/app';
-import { ThemeProvider } from 'styled-components';
-import NextProgress from 'nextjs-progressbar';
+import Head from "next/head";
+import { AppProps } from "next/app";
+import { ThemeProvider } from "styled-components";
+import NextProgress from "nextjs-progressbar";
 
-import theme from 'styles/theme';
-import GlobalStyles from 'styles/global';
+import theme from "styles/theme";
+import GlobalStyles from "styles/global";
 
 function App({ Component, pageProps: { ...pageProps } }: AppProps) {
+  const renderGlobalTheme = () => {
+    //@ts-ignore
+    return <GlobalStyles />;
+  };
+
   return (
+    //@ts-ignore
     <ThemeProvider theme={theme}>
       <Head>
         <title>Sistema de gerenciamento de oficinas</title>
@@ -18,7 +24,7 @@ function App({ Component, pageProps: { ...pageProps } }: AppProps) {
           content="Sistem de gestão para oficinas de motocicletas"
         />
       </Head>
-      <GlobalStyles />
+      {renderGlobalTheme()}
       <NextProgress
         color="#ffffff"
         startPosition={0.3}

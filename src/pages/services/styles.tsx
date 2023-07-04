@@ -4,7 +4,7 @@ import media from "styled-media-query";
 export const Wrapper = styled.section`
   ${({ theme }) => css`
     width: 100%;
-    min-height: 75vh;
+
     background: #ffffff;
     border-radius: 0.5rem;
     padding: ${theme.spacings.xxsmall};
@@ -24,3 +24,5 @@ export const WrapperListActions = styled.div`
     justify-content: flex-end;
   `}
 `;
+
+export default () => {};

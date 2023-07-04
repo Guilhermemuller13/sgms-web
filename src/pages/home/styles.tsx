@@ -72,6 +72,7 @@ export const ListUsers = styled.div`
     width: 50%;
     align-items: center;
     flex-direction: column;
+
     background: #ffffff;
     border-radius: 0.8rem;
     box-shadow: 0.2rem 0.2rem 0.6rem #d9d9d9d9, -0.2rem -0.2rem 0.6rem #ffffff;
@@ -86,3 +87,5 @@ export const ListUsers = styled.div`
     `};
   `}
 `;
+
+export default () => {};

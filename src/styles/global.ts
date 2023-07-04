@@ -2,14 +2,15 @@ import {
   createGlobalStyle,
   css,
   DefaultTheme,
-  GlobalStyleComponent
-} from 'styled-components';
+  GlobalStyleComponent,
+} from "styled-components";
 
 type GlobalStylesProps = {
   removeBG?: boolean;
 };
 
 const GlobalStyles: GlobalStyleComponent<
+  //@ts-ignore
   GlobalStylesProps,
   DefaultTheme
 > = createGlobalStyle`
