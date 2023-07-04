@@ -22,11 +22,11 @@ const TableUsers: FC<PropsWithChildren<TableUsersProps>> = ({ data = [] }) => {
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("username", {
-      header: () => <span>Serviço</span>,
+      header: () => <span>Nome</span>,
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("email", {
-      header: () => <span>Descrição</span>,
+      header: () => <span>Email</span>,
       cell: (info) => info.getValue(),
     }),
   ];

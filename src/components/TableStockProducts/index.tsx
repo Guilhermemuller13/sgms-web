@@ -13,6 +13,7 @@ type Product = {
   quantity_minimum: number;
   code: string;
   id: string;
+  name: string;
 };
 
 export type TableStockProductsProps = {
@@ -24,12 +25,12 @@ const TableStockProducts: FC<PropsWithChildren<TableStockProductsProps>> = ({
 }) => {
   const columnHelper = createColumnHelper<Product>();
   const columns = [
-    columnHelper.accessor("id", {
-      header: () => <span>ID</span>,
-      cell: (info) => info.getValue(),
-    }),
     columnHelper.accessor("code", {
       header: () => <span>Código</span>,
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("name", {
+      header: () => <span>Produto</span>,
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("quantity", {
@@ -37,7 +38,7 @@ const TableStockProducts: FC<PropsWithChildren<TableStockProductsProps>> = ({
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("quantity_minimum", {
-      header: () => <span>Quantidade Min.</span>,
+      header: () => <span>Qtd. Min.</span>,
       cell: (info) => info.getValue(),
     }),
   ];

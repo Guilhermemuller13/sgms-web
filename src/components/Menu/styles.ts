@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import media from 'styled-media-query';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
 export const Wrapper = styled.menu`
   ${({ theme }) => css`
@@ -11,7 +11,7 @@ export const Wrapper = styled.menu`
 `;
 
 export const LogoWrapper = styled.div`
-  ${media.lessThan('medium')`
+  ${media.lessThan("medium")`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -42,7 +42,7 @@ export const MenuGroup = styled.div`
 
 export const MenuNav = styled.div`
   ${({ theme }) => css`
-    ${media.greaterThan('medium')`
+    ${media.greaterThan("medium")`
 			margin-left: ${theme.spacings.small};
 		`}
   `}
@@ -60,7 +60,7 @@ export const MenuLink = styled.a`
 
     &:hover {
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         display: block;
         height: 0.3rem;
@@ -82,12 +82,11 @@ export const MenuLink = styled.a`
   `}
 `;
 
-type MenuFullProps = {
-  isOpen: boolean;
-};
+type MenuFullProps = {};
 
 export const MenuFull = styled.nav<MenuFullProps>`
-  ${({ theme, isOpen }) => css`
+  ${({ theme }) => css`
+    background: red;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -101,8 +100,8 @@ export const MenuFull = styled.nav<MenuFullProps>`
     height: 100vh;
     overflow: hidden;
     transition: opacity 0.3s ease-in-out;
-    opacity: ${isOpen ? 1 : 0};
-    pointer-events: ${isOpen ? 'all' : 'none'};
+    opacity: 1
+    pointer-events: "all";
 
     > svg {
       position: absolute;
@@ -123,16 +122,16 @@ export const MenuFull = styled.nav<MenuFullProps>`
     }
 
     ${MenuLink} {
-      color: ${theme.colors.black};
+      color: ${theme.colors.black} !important;
       font-weight: ${theme.font.bold};
       font-size: ${theme.font.sizes.xlarge};
       margin-bottom: ${theme.spacings.small};
-      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
+      transform: "translateY(0)";
       transition: transform 0.3s ease-in-out;
     }
 
     ${RegisterBox} {
-      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
+      transform: "translateY(0)";
       transition: transform 0.3s ease-in-out;
     }
   `}

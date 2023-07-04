@@ -1,13 +1,13 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { AccountCircle, ExitToApp } from '@styled-icons/material-outlined';
-import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { AccountCircle, ExitToApp } from "@styled-icons/material-outlined";
+import { ChevronDown } from "@styled-icons/boxicons-regular/ChevronDown";
 
-import Dropdown from '../Dropdown';
+import Dropdown from "../Dropdown";
 
-import { tokenService } from '../../services/auth/tokenService';
+import { tokenService } from "../../services/auth/tokenService";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export type UserDropdownProps = {
   username: string;
@@ -18,7 +18,7 @@ const UserDropdown = ({ username }: UserDropdownProps) => {
 
   const handleSignOut = async () => {
     tokenService.delete();
-    push('/sign-in');
+    push("/sign-in");
   };
 
   return (
@@ -32,16 +32,16 @@ const UserDropdown = ({ username }: UserDropdownProps) => {
       }
     >
       <S.Nav>
-        <Link href="/profile/me" passHref>
+        {/* <Link href="/profile/me" passHref>
           <S.Link>
             <AccountCircle />
             <span>My profile</span>
           </S.Link>
-        </Link>
+        </Link> */}
 
         <S.Link role="button" title="Sign out" onClick={handleSignOut}>
           <ExitToApp />
-          <span>Sign out</span>
+          <span>Sair</span>
         </S.Link>
       </S.Nav>
     </Dropdown>

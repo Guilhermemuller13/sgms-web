@@ -45,7 +45,7 @@ export default {
   },
   layers: {
     base: 10,
-    menu: 50,
+    menu: 30,
     overlay: 30,
     modal: 40,
     alwaysOnTop: 50,
