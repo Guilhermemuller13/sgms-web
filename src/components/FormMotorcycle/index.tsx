@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+import { Formik, Form } from "formik";
 import {
   Email,
   ArrowBack,
   ErrorOutline,
-  Save
-} from '@styled-icons/material-outlined';
+  Save,
+} from "@styled-icons/material-outlined";
 
-import Button from 'components/Button';
-import TextField from 'components/TextField';
-import { FormError, FormWrapper } from 'components/Form';
+import Button from "components/Button";
+import TextField from "components/TextField";
+import { FormError, FormWrapper } from "components/Form";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export type FormMotorcycleSchema = {
   license_plate: string;
@@ -25,15 +25,24 @@ export type FormMotorcycleSchema = {
 };
 
 const initialValues: FormMotorcycleSchema = {
-  license_plate: '',
-  year: '',
+  license_plate: "",
+  year: "",
   engine_capacity: 125,
-  color: '',
-  brand: '',
-  name: ''
+  color: "",
+  brand: "",
+  name: "",
 };
 
-const formSchemaValues = Yup.object({});
+const formSchemaValues = Yup.object({
+  name: Yup.string().required("Insira um nome"),
+  brand: Yup.string().required("Insira uma marca"),
+  color: Yup.string().required("Insira uma cor"),
+  engine_capacity: Yup.number()
+    .required("Insira a potência")
+    .min(50, "Digite uma cilindrada acima de 50"),
+  year: Yup.string().required("Insira o ano"),
+  license_plate: Yup.string().required("Insira a placa"),
+});
 
 export type FormMotorcycleProps = {
   handleSubmitForm: (values: FormMotorcycleSchema) => void;
@@ -42,9 +51,9 @@ export type FormMotorcycleProps = {
 
 const FormMotorcycle = ({
   handleSubmitForm,
-  motorcycleForEdit
+  motorcycleForEdit,
 }: FormMotorcycleProps) => {
-  const [formError, setFormError] = useState('');
+  const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
   const routes = useRouter();
 
@@ -70,7 +79,7 @@ const FormMotorcycle = ({
               <Button
                 icon={<ArrowBack />}
                 size="medium"
-                onClick={() => routes.push('/motorcycles')}
+                onClick={() => routes.push("/motorcycles")}
                 type="button"
               >
                 Voltar
@@ -87,7 +96,7 @@ const FormMotorcycle = ({
                 type="text"
                 error={errors.name}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('name', value)}
+                onInput={(value) => setFieldValue("name", value)}
                 value={values.name}
               />
               <TextField
@@ -97,7 +106,7 @@ const FormMotorcycle = ({
                 type="text"
                 error={errors.brand}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('brand', value)}
+                onInput={(value) => setFieldValue("brand", value)}
                 value={values.brand}
               />
               <TextField
@@ -107,7 +116,7 @@ const FormMotorcycle = ({
                 type="text"
                 error={errors.license_plate}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('license_plate', value)}
+                onInput={(value) => setFieldValue("license_plate", value)}
                 value={values.license_plate}
               />
             </S.WrapperTextFileds>
@@ -119,16 +128,16 @@ const FormMotorcycle = ({
                 type="text"
                 error={errors.color}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('color', value)}
+                onInput={(value) => setFieldValue("color", value)}
                 value={values.color}
               />
               <TextField
                 name="engine_capacity"
                 label="Potência"
-                type="text"
+                type="number"
                 error={errors.engine_capacity}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('engine_capacity', value)}
+                onInput={(value) => setFieldValue("engine_capacity", +value)}
                 value={values.engine_capacity}
               />
               <TextField
@@ -137,7 +146,7 @@ const FormMotorcycle = ({
                 type="text"
                 error={errors.year}
                 icon={<Email />}
-                onInput={(value) => setFieldValue('year', value)}
+                onInput={(value) => setFieldValue("year", value)}
                 value={values.year}
               />
             </S.WrapperTextFileds>

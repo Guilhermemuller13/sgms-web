@@ -1,15 +1,15 @@
-import { useRouter } from 'next/router';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-import { Edit } from '@styled-icons/material-outlined';
-import { Trash } from 'styled-icons/bootstrap';
+import { Edit } from "@styled-icons/material-outlined";
+import { Trash } from "styled-icons/bootstrap";
 
-import Button from '../Button';
+import Button from "../Button";
 
-import * as S from './styles';
-import { usersService } from '../../services/users';
-import { UserSession } from '../../types/models';
+import * as S from "./styles";
+import { usersService } from "../../services/users";
+import { UserSession } from "../../types/models";
 
 type User = {
   dataValues: {
@@ -21,7 +21,7 @@ type User = {
 
 export type ListUsersProps = {
   users: User[];
-  currentUser: UserSession;
+  currentUser?: UserSession;
 };
 
 const ListUsers = ({ users, currentUser }: ListUsersProps) => {
@@ -35,14 +35,14 @@ const ListUsers = ({ users, currentUser }: ListUsersProps) => {
 
   const handleDeleteUser = (id: number) => {
     MySwal.fire({
-      title: 'Você tem certeza?',
-      text: 'Isso não poderá ser revertido!',
-      icon: 'warning',
+      title: "Você tem certeza?",
+      text: "Isso não poderá ser revertido!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim, remover!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Sim, remover!",
     }).then(({ isConfirmed }) => {
       if (isConfirmed) {
         usersService.delete({ id }).then(() => routes.push(`/users/`));

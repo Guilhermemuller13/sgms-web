@@ -1,16 +1,74 @@
-import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
-export const ForgotPassword = styled.a`
+export const WrapperTextFileds = styled.div`
   ${({ theme }) => css`
-    display: block;
+    display: flex;
+
+    ${media.lessThan("medium")`
+      flex-direction: column;
+    `}
+
+    .react-select {
+      flex-direction: column;
+      padding: ${theme.spacings.xxsmall} ${theme.spacings.xxsmall};
+      width: 100%;
+    }
+  `}
+`;
+
+export const WrapperTextFiledsSelect = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    padding: ${theme.spacings.xxsmall} ${theme.spacings.xxsmall};
+    width: 100%;
+  `}
+`;
+
+export const WrapperActionsForm = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+  `}
+`;
+
+export const Label = styled.label`
+  ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};
     color: ${theme.colors.black};
-    text-decoration: none;
-    text-align: right;
+    padding: 0 ${theme.spacings.xxsmall};
+  `}
+`;
 
-    &:hover {
-      color: ${lighten(0.2, theme.colors.black)};
+export const WrapperListProducts = styled.div`
+  ${({ theme }) => css`
+    padding: 0 ${theme.spacings.xxsmall};
+  `}
+`;
+
+export const ListProducts = styled.ul`
+  ${({ theme }) => css`
+    list-style: none;
+  `}
+`;
+
+export const ProductItem = styled.li`
+  ${({ theme }) => css`
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+
+    > * {
+      &:nth-child(2) {
+        width: 50%;
+      }
+    }
+
+    button {
+      background: red;
     }
   `}
 `;

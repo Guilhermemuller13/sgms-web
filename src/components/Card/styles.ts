@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
 export const Wrapper = styled.main`
   ${() => css`
@@ -11,6 +12,12 @@ export const Wrapper = styled.main`
     padding: 0.5rem;
     margin: 0.5rem;
     cursor: pointer;
+
+    float: left;
+
+    ${media.lessThan("medium")`
+      width: 100%;
+    `}
   `}
 `;
 
@@ -76,7 +83,7 @@ export const Image = styled.img`
   ${() => css`
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 0.6rem;
   `}
 `;

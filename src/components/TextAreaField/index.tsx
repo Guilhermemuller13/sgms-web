@@ -1,8 +1,14 @@
-import { useState, ReactNode, ChangeEvent, InputHTMLAttributes } from "react";
+import {
+  useState,
+  ReactNode,
+  ChangeEvent,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+} from "react";
 
 import * as S from "./styles";
 
-export type TextFieldProps = {
+export type TextAreaFieldProps = {
   onInput?: (value: string) => void;
   label?: string;
   initialValue?: string;
@@ -10,9 +16,9 @@ export type TextFieldProps = {
   iconPosition?: "left" | "right";
   disabled?: boolean;
   error?: string;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "onInput">;
+} & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onInput">;
 
-const TextField = ({
+const TextAreaField = ({
   icon,
   iconPosition = "left",
   label,
@@ -22,10 +28,10 @@ const TextField = ({
   disabled = false,
   onInput,
   ...props
-}: TextFieldProps) => {
+}: TextAreaFieldProps) => {
   const [value, setValue] = useState(initialValue);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.currentTarget.value;
     setValue(newValue);
 
@@ -37,8 +43,7 @@ const TextField = ({
       {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
       <S.InputWrapper>
         {!!icon && <S.Icon iconPosition={iconPosition}>{icon}</S.Icon>}
-        <S.Input
-          type="text"
+        <S.TextArea
           onChange={onChange}
           value={value}
           iconPosition={iconPosition}
@@ -53,4 +58,4 @@ const TextField = ({
   );
 };
 
-export default TextField;
+export default TextAreaField;

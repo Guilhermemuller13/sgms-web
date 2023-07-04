@@ -1,24 +1,39 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 
-import Container from '../../components/Container';
+import Container from "../../components/Container";
 import FormMotorcycle, {
-  FormMotorcycleSchema
-} from '../../components/FormMotorcycle';
-import Base from '../../templates/Base';
+  FormMotorcycleSchema,
+} from "../../components/FormMotorcycle";
+import Base from "../../templates/Base";
 
-import { withSession } from '../../services/auth/session';
+import { withSession } from "../../services/auth/session";
 
-import { UserSession } from '../../types/models';
+import { UserSession } from "../../types/models";
 
-import * as S from './styles';
-import api from '../../services/api';
-import { tokenService } from '../../services/auth/tokenService';
+import * as S from "./styles";
+import api from "../../services/api";
+import { tokenService } from "../../services/auth/tokenService";
 
 type MotorcycleNewProps = { session: UserSession; motorcyclesBrands: any };
 
 const MotorcycleNew = ({ session, motorcyclesBrands }: MotorcycleNewProps) => {
-  const handleSubmitForm = (values: FormMotorcycleSchema) => {
-    return;
+  const routes = useRouter();
+
+  const handleSubmitForm = async (values: FormMotorcycleSchema) => {
+    const token = tokenService.get({ context: null });
+
+    const motorcycle = { ...values };
+
+    try {
+      const { data } = await api.post(`/motorcycles`, motorcycle, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return routes.push("/motorcycles");
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   console.log({ motorcyclesBrands });
@@ -41,17 +56,17 @@ export const getServerSideProps = withSession(
     const token = tokenService.get({ context: context });
 
     const { data: motorcyclesBrands } = await api.get(`/motorcycles-brands`, {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     return {
       props: {
         session: session,
-        motorcyclesBrands: motorcyclesBrands
-      }
+        motorcyclesBrands: motorcyclesBrands,
+      },
     };
   },
-  'manage:motorcycles'
+  "manage:motorcycles"
 );
 
 export default MotorcycleNew;

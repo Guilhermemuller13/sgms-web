@@ -1,10 +1,10 @@
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { css, DefaultTheme } from "styled-components";
 
-import { TextFieldProps } from '.';
+import { TextFieldProps } from ".";
 
-type IconPositionProps = Pick<TextFieldProps, 'iconPosition'>;
+type IconPositionProps = Pick<TextFieldProps, "iconPosition">;
 
-type WrapperProps = Pick<TextFieldProps, 'disabled'> & { error?: boolean };
+type WrapperProps = Pick<TextFieldProps, "disabled"> & { error?: boolean };
 
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
@@ -50,7 +50,7 @@ export const Icon = styled.div<IconPositionProps>`
     display: flex;
     width: 2.2rem;
     color: ${theme.colors.gray};
-    order: ${iconPosition === 'right' ? 1 : 0};
+    order: ${iconPosition === "right" ? 1 : 0};
 
     & > svg {
       width: 100%;
@@ -87,7 +87,7 @@ const wrapperModifiers = {
         color: currentColor;
       }
     }
-  `
+  `,
 };
 
 export const Wrapper = styled.div<WrapperProps>`

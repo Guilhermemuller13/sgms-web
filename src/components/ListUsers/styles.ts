@@ -1,12 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
 export const Wrapper = styled.main`
   ${({ theme }) => css`
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
     align-items: center;
     grid-gap: 0.5rem;
-    padding: ${theme.spacings.xxsmall};
+    padding: ${theme.spacings.xxsmall}; */
   `}
 `;
 
@@ -19,6 +20,12 @@ export const UserWrapper = styled.div`
     width: 24rem;
     height: 15rem;
     padding: ${theme.spacings.xsmall};
+
+    float: left;
+
+    ${media.lessThan("medium")`
+      width: 100%;
+    `}
   `}
 `;
 

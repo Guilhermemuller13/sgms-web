@@ -1,20 +1,16 @@
-import {
-  ChangeEvent,
-  ReactElement,
-  SelectHTMLAttributes,
-  useState
-} from 'react';
+import { ReactElement, SelectHTMLAttributes } from "react";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export type SelectProps = {
   onSelect?: (value: number) => void;
   initialValue?: number;
-  label: string;
+  label?: string;
   disabled?: boolean;
   error?: string;
   children: ReactElement<HTMLOptionElement>[];
-} & Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onSelect'>;
+  defaultOption?: boolean;
+} & Omit<SelectHTMLAttributes<HTMLSelectElement>, "onSelect">;
 
 const Select = ({
   onSelect,
@@ -22,27 +18,18 @@ const Select = ({
   label,
   disabled = false,
   error,
+  children,
+  defaultOption = false,
   ...props
 }: SelectProps) => {
-  const [value, setValue] = useState(initialValue);
-
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValue = +e.currentTarget.value;
-    setValue(newValue);
-
-    !!onSelect && onSelect(newValue);
-  };
-
   return (
     <S.Wrapper>
       {!!label && <S.Label>{label}</S.Label>}
       <S.InputWrapper>
-        <S.Select
-          onChange={onChange}
-          value={value}
-          disabled={disabled}
-          {...props}
-        ></S.Select>
+        <S.Select disabled={disabled} {...props}>
+          {defaultOption && <option value="0">Selecione</option>}
+          {children}
+        </S.Select>
       </S.InputWrapper>
       {!!error && <S.Error>{error}</S.Error>}
     </S.Wrapper>

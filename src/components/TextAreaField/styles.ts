@@ -1,45 +1,60 @@
 import styled, { css, DefaultTheme } from "styled-components";
 
-import { SelectProps } from ".";
+import { TextAreaFieldProps } from ".";
 
-type WrapperProps = Pick<SelectProps, "disabled"> & { error?: boolean };
+type IconPositionProps = Pick<TextAreaFieldProps, "iconPosition">;
+
+type WrapperProps = Pick<TextAreaFieldProps, "disabled"> & { error?: boolean };
 
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
-    height: 4.2rem;
-    /* padding: 0 ${theme.spacings.xxsmall}; */
+    background: ${theme.colors.lightGray};
+    border-radius: 0.2rem;
+    padding: 0 ${theme.spacings.xsmall};
+    border: 0.2rem solid;
+    border-color: ${theme.colors.lightGray};
+    height: 10rem;
+
+    &:focus-within {
+      box-shadow: 0 0 0.5rem ${theme.colors.primary};
+    }
   `}
 `;
 
-export const Select = styled.select`
-  ${({ theme }) => css`
-    background: #eaeaea;
-    color: ${theme.colors.gray};
+export const TextArea = styled.textarea<IconPositionProps>`
+  ${({ theme, iconPosition }) => css`
+    color: ${theme.colors.black};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xxsmall} 0;
+    padding-${iconPosition}: ${theme.spacings.xsmall};
+    background: transparent;
     border: 0;
     outline: none;
     width: 100%;
-
-    option {
-      color: black;
-      background: white;
-      display: flex;
-      white-space: pre;
-      min-height: 20px;
-      padding: 0px 2px 1px;
-    }
+    resize: none;
   `}
 `;
 
 export const Label = styled.label`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};
-    /* padding: 0 ${theme.spacings.xxsmall}; */
     color: ${theme.colors.black};
     cursor: pointer;
+  `}
+`;
+
+export const Icon = styled.div<IconPositionProps>`
+  ${({ theme, iconPosition }) => css`
+    display: flex;
+    width: 2.2rem;
+    color: ${theme.colors.gray};
+    order: ${iconPosition === "right" ? 1 : 0};
+
+    & > svg {
+      width: 100%;
+    }
   `}
 `;
 
@@ -56,13 +71,15 @@ const wrapperModifiers = {
       border-color: ${theme.colors.red};
     }
 
+    ${Icon},
     ${Label} {
       color: ${theme.colors.red};
     }
   `,
   disabled: (theme: DefaultTheme) => css`
     ${Label},
-    ${Select} {
+    ${TextArea},
+    ${Icon} {
       cursor: not-allowed;
       color: ${theme.colors.gray};
 

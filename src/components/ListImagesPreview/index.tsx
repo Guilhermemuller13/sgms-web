@@ -1,9 +1,9 @@
-import { FC, PropsWithChildren } from 'react';
-import { Delete } from '@styled-icons/material-outlined';
+import { FC, PropsWithChildren } from "react";
+import { Delete } from "@styled-icons/material-outlined";
 
-import Button from '../Button';
+import Button from "../Button";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 export type ListFilesBlob = {
   id: string;
@@ -19,7 +19,7 @@ export type ListImagesPreviewProps = {
 
 const ListImagesPreview: FC<PropsWithChildren<ListImagesPreviewProps>> = ({
   files,
-  onRemoveFile
+  onRemoveFile,
 }) => {
   const handleDeleteFile = (fileId: string) =>
     onRemoveFile && onRemoveFile(fileId);

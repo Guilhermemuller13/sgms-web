@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components';
-import media from 'styled-media-query';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
-export const WrapperTextFileds = styled.div`
+export const WrapperTextFields = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
 
-    ${media.lessThan('medium')`
+    ${media.lessThan("medium")`
       flex-direction: column;
     `}
   `}
