@@ -1,13 +1,14 @@
-import { FC } from 'react';
-import Link from 'next/link';
+import { FC } from "react";
+import Link from "next/link";
 
-import Heading from 'components/Heading';
-import Logo from 'components/Logo';
+import Heading from "components/Heading";
+import Logo from "components/Logo";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 type AuthProps = { title: string };
 
+//@ts-ignore
 const Auth: FC<AuthProps> = ({ title, children }) => (
   <S.Wrapper>
     <S.BannerBlock>

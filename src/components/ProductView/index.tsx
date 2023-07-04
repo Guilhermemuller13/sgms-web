@@ -41,7 +41,7 @@ const ProductView: FC<PropsWithChildren<ProductViewProps>> = ({ product }) => {
         <S.Description>{product.description}</S.Description>
 
         <ListImagesPreview
-          files={files.map((file) => ({
+          files={files.map((file: any) => ({
             id: file.id,
             src: getImageUrl(file.src),
           }))}

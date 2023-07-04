@@ -11,6 +11,7 @@
 
 module.exports = {
   publicRuntimeConfig: {
-    backendUrl: process.env.BACKEND_URL
-  }
+    backendUrl: process.env.BACKEND_URL,
+  },
+  // pageExtensions: ["index.tsx"],
 };

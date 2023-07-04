@@ -14,10 +14,6 @@ export const Wrapper = styled.section`
       position: relative;
       z-index: ${theme.layers.base};
     `};
-
-    ${media.lessThan("medium")`
-      min-height: 100vh;
-    `};
   `}
 `;
 
@@ -28,3 +24,5 @@ export const WrapperListActions = styled.div`
     justify-content: flex-end;
   `}
 `;
+
+export default () => {};

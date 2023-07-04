@@ -1,18 +1,13 @@
 import styled, { css } from "styled-components";
 import media from "styled-media-query";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
   ${({ theme }) => css`
     width: 100%;
+    min-height: 75vh;
     background: #ffffff;
+    border-radius: 0.5rem;
     padding: ${theme.spacings.xxsmall};
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
-    height: 75vh;
 
     ${media.greaterThan("medium")`
       margin: ${theme.spacings.large} 0;
@@ -22,11 +17,12 @@ export const Wrapper = styled.div`
   `}
 `;
 
-export const NotFoundTitle = styled.span`
-  ${({ theme }) => css`
-    font-size: ${theme.font.sizes.xxlarge};
-    font-weight: 700;
+export const WrapperListActions = styled.div`
+  ${() => css`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   `}
 `;
 
-export const NotFoundMessage = styled.span``;
+export default () => {};

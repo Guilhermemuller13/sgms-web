@@ -37,7 +37,7 @@ const ProductNew = ({ session }: ProductNewProps) => {
 
       if (Array.from(values.photos).length > 0) {
         const formData = new FormData();
-        Array.from(values.photos).forEach((photo) =>
+        Array.from(values.photos).forEach((photo: any) =>
           formData.append("photos", photo.file)
         );
 

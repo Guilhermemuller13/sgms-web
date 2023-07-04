@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import media from 'styled-media-query';
+import styled, { css } from "styled-components";
+import media from "styled-media-query";
 
 export const Wrapper = styled.section`
   ${({ theme }) => css`
@@ -9,7 +9,7 @@ export const Wrapper = styled.section`
     border-radius: 0.5rem;
     padding: ${theme.spacings.xxsmall};
 
-    ${media.greaterThan('medium')`
+    ${media.greaterThan("medium")`
       margin: ${theme.spacings.large} 0;
       position: relative;
       z-index: ${theme.layers.base};
@@ -24,3 +24,5 @@ export const WrapperListActions = styled.div`
     justify-content: flex-end;
   `}
 `;
+
+export default () => {};

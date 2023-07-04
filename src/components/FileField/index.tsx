@@ -2,10 +2,10 @@ import {
   AnchorHTMLAttributes,
   InputHTMLAttributes,
   forwardRef,
-  ForwardRefRenderFunction
-} from 'react';
+  ForwardRefRenderFunction,
+} from "react";
 
-import * as S from './styles';
+import * as S from "./styles";
 
 type InputTypes =
   | AnchorHTMLAttributes<HTMLAnchorElement>
@@ -17,6 +17,7 @@ const FileField: ForwardRefRenderFunction<FileFieldProps, InputTypes> = (
   { ...props },
   ref
 ) => {
+  //@ts-ignore
   return <S.Input ref={ref} type="file" {...props} />;
 };
 

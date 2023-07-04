@@ -218,6 +218,7 @@ const FormProduct = ({
             <S.WrapperTextFiledFile>
               <FileField
                 accept="image/png, image/jpeg"
+                //@ts-ignore
                 ref={fileInputRef}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   const files = event.currentTarget.files;
