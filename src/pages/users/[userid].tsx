@@ -51,7 +51,8 @@ const UserEdit = ({ user: { dataValues }, userId, session }: UserEditProps) => {
             userForEdit={{
               email: dataValues.email,
               role_id: dataValues.role_id,
-              username: dataValues.username
+              username: dataValues.username,
+              password: ''
             }}
           />
         </S.Wrapper>

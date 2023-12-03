@@ -36,8 +36,6 @@ const MotorcycleNew = ({ session, motorcyclesBrands }: MotorcycleNewProps) => {
     }
   };
 
-  console.log({ motorcyclesBrands });
-
   return (
     <Base session={session}>
       <Container>

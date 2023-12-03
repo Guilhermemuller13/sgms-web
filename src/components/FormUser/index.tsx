@@ -7,6 +7,7 @@ import {
   ArrowBack,
   ErrorOutline,
   Save,
+  LockOpen
 } from "@styled-icons/material-outlined";
 
 import Button from "components/Button";
@@ -19,6 +20,7 @@ import Select from "../Select";
 export type FormUserSchema = {
   username: string;
   email: string;
+  password: string;
   role_id: number;
 };
 
@@ -26,6 +28,7 @@ const initialValues: FormUserSchema = {
   username: "",
   email: "",
   role_id: 1,
+  password:''
 };
 
 const formSchemaValues = Yup.object({
@@ -34,6 +37,7 @@ const formSchemaValues = Yup.object({
     .required("Insira seu email"),
   username: Yup.string().required("Insira o nome do usuário"),
   role_id: Yup.number().required("Selecione o papel do usuário"),
+  password: Yup.string().required("Insira a senha do usuário"),
 });
 
 export type FormUserProps = {
@@ -105,6 +109,16 @@ const FormUser = ({
                 icon={<Email />}
                 onInput={(value) => setFieldValue("email", value)}
                 value={values.email}
+              />
+              <TextField
+                name="password"
+                label="Senha"
+                placeholder="Senha do usuário"
+                type="password"
+                error={errors.password}
+                icon={<LockOpen />}
+                onInput={(value) => setFieldValue("password", value)}
+                value={values.password}
               />
               <Select
                 label="Selecione o tipo de usuário"

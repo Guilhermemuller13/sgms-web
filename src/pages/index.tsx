@@ -68,7 +68,7 @@ const Index = ({ session, dashboard }: HomeTemplateProps) => {
               title={totalProducts > 1000 ? `${totalProducts}k` : totalProducts}
             />
             <CardDashboard
-              description="Produtos utilizados"
+              description="Qtd de produtos utilizados"
               title={
                 totalProductsUsed > 1000
                   ? `${totalProductsUsed}k`

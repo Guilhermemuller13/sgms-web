@@ -48,6 +48,14 @@ export const WrapperListProducts = styled.div`
   `}
 `;
 
+export const WrapperTotalValueService = styled.div`
+  ${({ theme }) => css`
+    padding: 0 ${theme.spacings.xxsmall};
+    font-size: ${theme.font.sizes.xlarge};
+    font-weight: ${theme.font.bold};
+  `}
+`;
+
 export const ListProducts = styled.ul`
   ${({ theme }) => css`
     list-style: none;

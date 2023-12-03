@@ -22,6 +22,7 @@ type ProductList = {
   id: string;
   productId: string;
   quantity: number;
+  price: number
 };
 
 export type FormServiceSchema = {
@@ -72,6 +73,7 @@ const FormService: FC<FormServiceProps> = ({
         id: uuidv4(),
         productId: "0",
         quantity: 0,
+        price: 0
       },
     ]
   );
@@ -91,20 +93,24 @@ const FormService: FC<FormServiceProps> = ({
   };
 
   const handleNewProductList = () => {
-    const productDefault = {
+    const productDefault: ProductList = {
       id: uuidv4(),
       productId: "0",
       quantity: 0,
+      price: 0
     };
     setProductList((prevState) => [...prevState, productDefault]);
   };
 
   const onChangeProduct = (uuid: string, value: string) => {
+    const productValue = products.find((product) => +product.dataValues.id === +value);
+
     const productsUpdated = productList.map((product) => {
       if (product.id === uuid) {
         return {
           ...product,
           productId: value,
+          price: +productValue?.dataValues.price!
         };
       }
 
@@ -128,6 +134,16 @@ const FormService: FC<FormServiceProps> = ({
 
     setProductList(productsUpdated);
   };
+
+  const showResumeValueService = () => {
+    const total = productList.reduce((accumulator, current) => {
+      const value = accumulator + (+current.price * +current.quantity)
+
+      return value
+    }, 0);
+
+    return total;
+  }
 
   return (
     <FormWrapper>
@@ -270,6 +286,9 @@ const FormService: FC<FormServiceProps> = ({
                 })}
               </S.ListProducts>
             </S.WrapperListProducts>
+            <S.WrapperTotalValueService>
+              Valor Total:  {showResumeValueService()}
+            </S.WrapperTotalValueService>
             <S.WrapperTextFileds>
               <TextAreaField
                 label="Descrição do serviço"
